@@ -1,0 +1,206 @@
+{
+  "J48_unpruned": {
+    "optionName": "-U",
+    "presenceMeans": true
+  },
+  "J48_reducedErrorPruning": {
+    "optionName": "-R",
+    "presenceMeans": true
+  },
+  "J48_confidenceFactorValue": {
+    "optionName": "-C",
+    "presenceMeans": true
+  },
+  "J48_reducedErrorPruningSubtreeRaising": {
+    "optionName": "-S",
+    "presenceMeans": false
+  },
+  "J48_confidenceFactorSubtreeRaising": {
+    "optionName": "-S",
+    "presenceMeans": false
+  },
+  "J48_numFolds": {
+    "optionName": "-N",
+    "presenceMeans": true
+  },
+  "J48_seed": {
+    "optionName": "-Q",
+    "presenceMeans": true
+  },
+  "J48_binarySplits": {
+    "optionName": "-B",
+    "presenceMeans": true
+  },
+  "J48_useMDLcorrection": {
+    "optionName": "-J",
+    "presenceMeans": false
+  },
+  "J48_useLaplace": {
+    "optionName": "-A",
+    "presenceMeans": true
+  },
+  "J48_doNotMakeSplitPointActualValue": {
+    "optionName": "-doNotMakeSplitPointActualValue",
+    "presenceMeans": true
+  },
+  "J48_collapseTree": {
+    "optionName": "-O",
+    "presenceMeans": false
+  },
+  "J48_minNumObj": {
+    "optionName": "-M",
+    "presenceMeans": true
+  },
+  "DecisionTable_evaluationMeasure": {
+    "optionName": "-E",
+    "presenceMeans": true
+  },
+  "DecisionTable_search": {
+    "optionName": "-S",
+    "presenceMeans": true
+  },
+  "DecisionTable_useIBk": {
+    "optionName": "-I",
+    "presenceMeans": true
+  },
+  "DecisionTable_crossVal": {
+    "optionName": "-X",
+    "presenceMeans": true
+  },
+  "GreedyStepwise_numToSelect": {
+    "optionName": "-N",
+    "presenceMeans": true
+  },
+  "GreedyStepwise_threshold": {
+    "optionName": "-T",
+    "presenceMeans": true
+  },
+  "GreedyStepwise_generateRanking": {
+    "optionName": "-R",
+    "presenceMeans": true
+  },
+  "GreedyStepwise_searchBackwards": {
+    "optionName": "-B",
+    "presenceMeans": true
+  },
+  "GreedyStepwise_conservativeForwardSelection": {
+    "optionName": "-C",
+    "presenceMeans": true
+  },
+  "BestFirst_direction": {
+    "optionName": "-D",
+    "presenceMeans": true
+  },
+  "BestFirst_searchTermination": {
+    "optionName": "-N",
+    "presenceMeans": true
+  },
+  "PART_confidenceFactorValue": {
+    "optionName": "-C",
+    "presenceMeans": true
+  },
+  "PART_seed": {
+    "optionName": "-Q",
+    "presenceMeans": true
+  },
+  "PART_reducedErrorPruning": {
+    "optionName": "-R",
+    "presenceMeans": true
+  },
+  "PART_numFolds": {
+    "optionName": "-N",
+    "presenceMeans": true
+  },
+  "PART_unpruned": {
+    "optionName": "-U",
+    "presenceMeans": true
+  },
+  "PART_binarySplits": {
+    "optionName": "-B",
+    "presenceMeans": true
+  },
+  "PART_useMDLcorrection": {
+    "optionName": "-J",
+    "presenceMeans": false
+  },
+  "PART_doNotMakeSplitPointActualValue": {
+    "optionName": "-doNotMakeSplitPointActualValue",
+    "presenceMeans": true
+  },
+  "PART_minNumObj": {
+    "optionName": "-M",
+    "presenceMeans": true
+  },
+  "REPTree_seed": {
+    "optionName": "-S",
+    "presenceMeans": true
+  },
+  "REPTree_minNum": {
+    "optionName": "-M",
+    "presenceMeans": true
+  },
+  "REPTree_numFolds": {
+    "optionName": "-N",
+    "presenceMeans": true
+  },
+  "REPTree_noPruning": {
+    "optionName": "-P",
+    "presenceMeans": true
+  },
+  "REPTree_maxDepth": {
+    "optionName": "-L",
+    "presenceMeans": true
+  },
+  "JRip_seed": {
+    "optionName": "-S",
+    "presenceMeans": true
+  },
+  "JRip_folds": {
+    "optionName": "-F",
+    "presenceMeans": true
+  },
+  "JRip_optimizations": {
+    "optionName": "-O",
+    "presenceMeans": true
+  },
+  "JRip_usePruning": {
+    "optionName": "-P",
+    "presenceMeans": false
+  },
+  "JRip_checkErrorRate": {
+    "optionName": "-E",
+    "presenceMeans": false
+  },
+  "JRip_minNo": {
+    "optionName": "-N",
+    "presenceMeans": true
+  },
+  "SimpleCart_heuristic": {
+    "optionName": "-H",
+    "presenceMeans": false
+  },
+  "SimpleCart_minNumObj": {
+    "optionName": "-M",
+    "presenceMeans": true
+  },
+  "SimpleCart_numFoldsPruning": {
+    "optionName": "-N",
+    "presenceMeans": true
+  },
+  "SimpleCart_seed": {
+    "optionName": "-S",
+    "presenceMeans": true
+  },
+  "SimpleCart_sizePer": {
+    "optionName": "-C",
+    "presenceMeans": true
+  },
+  "SimpleCart_useOneSE": {
+    "optionName": "-A",
+    "presenceMeans": true
+  },
+  "SimpleCart_usePrune": {
+    "optionName": "-U",
+    "presenceMeans": false
+  }
+}

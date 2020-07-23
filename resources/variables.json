@@ -1,0 +1,438 @@
+{
+  "Aggregator": {
+    "ptype": "discrete",
+    "dtype": "np.str_",
+    "params": {
+      "a": ["MajorityVotingAggregator", "CompetenceBasedAggregator"],
+      "p": [0.5, 0.5]
+    }
+  },
+  "J48": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [1, 0]
+    }
+  },
+  "J48_pruning": {
+    "ptype": "discrete",
+    "dtype": "np.str_",
+    "params": {
+      "a": ["unpruned", "reducedErrorPruning", "confidenceFactor"],
+      "p": [0.285, 0.285, 0.43]
+    }
+  },
+  "J48_confidenceFactorValue": {
+    "ptype": "continuous",
+    "dtype": "np.float64",
+    "params": {
+      "loc": 0.25,
+      "scale": 0.20,
+      "a_min": 0.05,
+      "a_max": 0.50,
+      "scale_init": 0.10
+    }
+  },
+  "J48_confidenceFactorSubtreeRaising": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.6, 0.4]
+    }
+  },
+  "J48_numFolds": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.1, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    }
+  },
+  "J48_seed": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [1],
+      "p": [1]
+    },
+    "learnable": false
+  },
+  "J48_reducedErrorPruningSubtreeRaising": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.6, 0.4]
+    }
+  },
+  "J48_binarySplits": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.4, 0.6]
+    }
+  },
+  "J48_useMDLcorrection": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.6, 0.4]
+    }
+  },
+  "J48_useLaplace": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.4, 0.6]
+    }
+  },
+  "J48_doNotMakeSplitPointActualValue": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.4, 0.6]
+    }
+  },
+  "J48_collapseTree": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.6, 0.4]
+    }
+  },
+  "J48_minNumObj": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    }
+  },
+  "DecisionTable": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [1, 0]
+    }
+  },
+  "DecisionTable_search": {
+    "ptype": "discrete",
+    "dtype": "np.str_",
+    "params": {
+      "a": ["GreedyStepwise", "BestFirst"],
+      "p": [0.4, 0.6]
+    }
+  },
+  "DecisionTable_evaluationMeasure": {
+    "ptype": "discrete",
+    "dtype": "np.str_",
+    "params": {
+      "a": ["acc", "rmse", "mae", "auc"],
+      "p": [0.168, 0.166, 0.166, 0.5]
+    }
+  },
+  "DecisionTable_useIBk": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.4, 0.6]
+    }
+  },
+  "DecisionTable_crossVal": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.208, 0.088, 0.088, 0.088, 0.088, 0.088, 0.088, 0.088, 0.088, 0.088]
+    }
+  },
+  "GreedyStepwise_searchBackwards": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [false, true],
+      "p": [0.6, 0.4]
+    }
+  },
+  "GreedyStepwise_conservativeForwardSelection": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [false, true],
+      "p": [0.6, 0.4]
+    }
+  },
+  "BestFirst_direction": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [0, 1, 2],
+      "p": [0.285, 0.43, 0.285]
+    }
+  },
+  "BestFirst_searchTermination": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.088, 0.088, 0.088, 0.088, 0.208, 0.088, 0.088, 0.088, 0.088, 0.088]
+    }
+  },
+  "PART": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [1, 0]
+    }
+  },
+  "PART_pruning": {
+    "ptype": "discrete",
+    "dtype": "np.str_",
+    "params": {
+      "a": ["unpruned", "reducedErrorPruning", "confidenceFactor"],
+      "p": [0.285, 0.285, 0.43]
+    }
+  },
+  "PART_confidenceFactorValue": {
+    "ptype": "continuous",
+    "dtype": "np.float64",
+    "params": {
+      "loc": 0.25,
+      "scale": 0.20,
+      "a_min": 0.05,
+      "a_max": 0.50,
+      "scale_init": 0.10
+    }
+  },
+  "PART_numFolds": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.1, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    }
+  },
+  "PART_seed": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [1],
+      "p": [1]
+    },
+    "learnable": false
+  },
+  "PART_binarySplits": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.4, 0.6]
+    }
+  },
+  "PART_useMDLcorrection": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.6, 0.4]
+    }
+  },
+  "PART_doNotMakeSplitPointActualValue": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.4, 0.6]
+    }
+  },
+  "PART_minNumObj": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    }
+  },
+  "REPTree": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0, 1]
+    }
+  },
+  "REPTree_seed": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [1],
+      "p": [1]
+    },
+    "learnable": false
+  },
+  "REPTree_minNum": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    }
+  },
+  "REPTree_numFolds": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.1, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    }
+  },
+  "REPTree_noPruning": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [0.4, 0.6]
+    }
+  },
+  "REPTree_maxDepth": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [-1, 1, 2, 3, 4, 5],
+      "p": [0.266, 0.1468, 0.1468, 0.1468, 0.1468, 0.1468]
+    }
+  },
+  "JRip": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [1, 0]
+    }
+  },
+  "JRip_seed": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [1],
+      "p": [1]
+    },
+    "learnable": false
+  },
+  "JRip_folds": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.1, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    }
+  },
+  "JRip_optimizations": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.088, 0.208, 0.088, 0.088, 0.088, 0.088, 0.088, 0.088, 0.088, 0.088]
+    }
+  },
+  "JRip_usePruning": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [false, true],
+      "p": [0.4, 0.6]
+    }
+  },
+  "JRip_checkErrorRate": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [false, true],
+      "p": [0.4, 0.6]
+    }
+  },
+  "JRip_minNo": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    }
+  },
+  "SimpleCart": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [true, false],
+      "p": [1, 0]
+    }
+  },
+  "SimpleCart_heuristic": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [false, true],
+      "p": [0.4, 0.6]
+    }
+  },
+  "SimpleCart_minNumObj": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+    }
+  },
+  "SimpleCart_numFoldsPruning": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "p": [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1]
+    }
+  },
+  "SimpleCart_seed": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [1],
+      "p": [1]
+    },
+    "learnable": false
+  },
+  "SimpleCart_sizePer": {
+    "ptype": "discrete",
+    "dtype": "np.int64",
+    "params": {
+      "a": [1],
+      "p": [1]
+    },
+    "learnable": false
+  },
+  "SimpleCart_useOneSE": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [false, true],
+      "p": [0.6, 0.4]
+    }
+  },
+  "SimpleCart_usePrune": {
+    "ptype": "discrete",
+    "dtype": "np.bool",
+    "params": {
+      "a": [false, true],
+      "p": [0.4, 0.6]
+    }
+  }
+}

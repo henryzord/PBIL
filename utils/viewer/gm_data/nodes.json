@@ -1,0 +1,424 @@
+{
+  "0": {
+    "label": "PBIL",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": false
+  },
+  "1": {
+    "label": "J48",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "2": {
+    "label": "PART",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "3": {
+    "label": "JRip",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "4": {
+    "label": "REPTree",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "5": {
+    "label": "DecisionTable",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "6": {
+    "label": "pruning",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "7": {
+    "label": "confidenceFactor",
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "8": {
+    "label": "reducedErrorPruning",
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "9": {
+    "label": "unpruned",
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "10": {
+    "label": "confidenceFactorValue",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "11": {
+    "label": "confidenceFactorSubtreeRaising",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "12": {
+    "label": "reducedErrorPruningSubtreeRaising",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "13": {
+    "label": "seed",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "14": {
+    "label": "numFolds",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "15": {
+    "label": "binarySplits",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "16": {
+    "label": "useMDLcorrection",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "17": {
+    "label": "useLaplace",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "18": {
+    "label": "doNotMakeSplitPointActualValue",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "19": {
+    "label": "minNumObj",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "20": {
+    "label": "collapseTree",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "22": {
+    "label": "search",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "23": {
+    "label": "evaluationMeasure",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "24": {
+    "label": "useIBk",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "25": {
+    "label": "crossVal",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "26": {
+    "label": "searchBackwards",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "27": {
+    "label": "conservativeForwardSelection",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "28": {
+    "label": "direction",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "29": {
+    "label": "searchTermination",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "31": {
+    "label": "pruning",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "32": {
+    "label": "confidenceFactorValue",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "33": {
+    "label": "numFolds",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "34": {
+    "label": "seed",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "35": {
+    "label": "binarySplits",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "36": {
+    "label": "useMDLcorrection",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "37": {
+    "label": "doNotMakeSplitPointActualValue",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "38": {
+    "label": "minNumObj",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "40": {
+    "label": "seed",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "41": {
+    "label": "minNum",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "42": {
+    "label": "numFolds",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "43": {
+    "label": "noPruning",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "44": {
+    "label": "maxDepth",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "46": {
+    "label": "seed",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "47": {
+    "label": "folds",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "48": {
+    "label": "optimizations",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "49": {
+    "label": "usePruning",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "50": {
+    "label": "checkErrorRate",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "51": {
+    "label": "minNo",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "52": {
+    "label": "GreedyStepwise",
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "53": {
+    "label": "BestFirst",
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "54": {
+    "label": "confidenceFactor",
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "55": {
+    "label": "reducedErrorPruning",
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "56": {
+    "label": "unpruned",
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "57": {
+    "label": true,
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "58": {
+    "label": false,
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "59": {
+    "label": "Aggregator",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "60": {
+    "label": "MajorityVoting",
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "61": {
+    "label": "CompetenceBasedVoting",
+    "color": "#AAAAAA",
+    "linewidth": 2,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "62": {
+    "label": "SimpleCart",
+    "linewidth": 1,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "63": {
+    "label": "minNumObj",
+    "linewidth": 2,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "64": {
+    "label": "numFoldsPruning",
+    "linewidth": 2,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "65": {
+    "label": "seed",
+    "linewidth": 2,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "66": {
+    "label": "sizePer",
+    "linewidth": 2,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "67": {
+    "label": "useOneSE",
+    "linewidth": 2,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "68": {
+    "label": "usePrune",
+    "linewidth": 2,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "69": {
+    "label": "heuristic",
+    "linewidth": 2,
+    "edgecolor": "#000000",
+    "variable": true
+  },
+  "70": {
+    "label": true,
+    "color": "#AAAAAA",
+    "linewidth": 1,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  },
+  "71": {
+    "label": false,
+    "color": "#AAAAAA",
+    "linewidth": 1,
+    "edgecolor": "#AAAAAA",
+    "variable": false
+  }
+}
