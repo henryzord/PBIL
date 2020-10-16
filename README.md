@@ -11,16 +11,16 @@ All base classifiers are Weka implementations. The EDA is implemented in Python.
 If you find this paper useful, please cite in your work:
 
 ```bibtex
-@inproceedings{cagnini2020pbil,
-  title = {{An Evolutionary Algorithm for Learning Interpretable Ensembles of Classifiers}},
-  author = {Cagnini, Henry E.L. and Freitas, Alex A. and Barros, Rodrigo C.},
-  year = {2020},
-  booktitle = {Brazilian Conference on Intelligent Systems},
-  pages = {1--15},
-  organization = {IEEE},
-  address = {Rio Grande, Brazil}
-}
-```
+@incollection{cagnini2020pbil,
+  title = {An Evolutionary Algorithm for Learning Interpretable Ensembles of Classifiers},
+  author = {Henry E. L. Cagnini and Alex A. Freitas and Rodrigo C. Barros},
+  year = {2020},	
+  publisher = {Springer},	
+  pages = {18--33},	
+  booktitle = {Intelligent Systems},
+  doi = {10.1007/978-3-030-61377-8_2},	
+  url = {https://doi.org/10.1007%2F978-3-030-61377-8_2}
+}```
 
 ## Installation
 
