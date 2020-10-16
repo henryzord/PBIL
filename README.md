@@ -20,7 +20,8 @@ If you find this paper useful, please cite in your work:
   booktitle = {Intelligent Systems},
   doi = {10.1007/978-3-030-61377-8_2},	
   url = {https://doi.org/10.1007%2F978-3-030-61377-8_2}
-}```
+}
+```
 
 ## Installation
 
