@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from weka.classifiers import Classifier
 
-from pbil.ptypes import process_sample
+from mPBIL.pbil.ptypes import process_sample
 
 
 def baseline_classifiers_options(classifiers):

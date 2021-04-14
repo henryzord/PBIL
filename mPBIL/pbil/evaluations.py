@@ -7,8 +7,8 @@ import numpy as np
 import pandas as pd
 from weka.classifiers import Evaluation
 
-from pbil.registry import generate_probability_averager_script
-from utils import from_python_stringlist_to_java_stringlist
+from mPBIL.pbil.registry import generate_probability_averager_script
+from mPBIL.utils import from_python_stringlist_to_java_stringlist
 
 
 class EDAEvaluator(object):

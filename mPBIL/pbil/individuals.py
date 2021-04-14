@@ -1,8 +1,8 @@
 import copy
 
-from pbil.evaluations import EDAEvaluation, internal_5fcv
-from pbil.generation import *
-from pbil.integration import baseline_aggregator_options
+from mPBIL.pbil.evaluations import EDAEvaluation, internal_5fcv
+from mPBIL.pbil.generation import *
+from mPBIL.pbil.integration import baseline_aggregator_options
 
 
 class Skeleton(object):

@@ -5,6 +5,8 @@ import multiprocessing as mp
 import shutil
 from datetime import datetime as dt
 from functools import reduce
+import pandas as pd
+import os
 
 from pbil.evaluations import EDAEvaluation, collapse_metrics, check_missing_experiments
 from pbil.evaluations import evaluate_on_test
@@ -45,6 +47,7 @@ def process_fold_sample(
 
         ens_names = ['baseline']
         jobjects = []
+        pobjects = []
         if not only_baselines:
             pbil = PBIL(lr=learning_rate, selection_share=selection_share,
                         n_generations=n_generations, n_individuals=n_individuals,
@@ -56,6 +59,7 @@ def process_fold_sample(
 
             ens_names += ['overall', 'last']
             jobjects += [overall._jobject_ensemble, last._jobject_ensemble]
+            pobjects += [overall, last]
 
             pbil.logger.individual_to_file(individual=overall, individual_name='overall', step=pbil.n_generation)
             pbil.logger.individual_to_file(individual=last, individual_name='last', step=pbil.n_generation)
@@ -73,14 +77,30 @@ def process_fold_sample(
             )
 
         jobjects += [baseline._jobject_ensemble]
+        pobjects += [baseline]
 
         dict_models = dict()
-        for ens_name, jobject in zip(ens_names, jobjects):
+
+        str_default_output = 'test_sample-%02.d_fold-%02.d.csv' % (n_sample, n_fold)
+
+        for ens_name, jobject, pobject in zip(ens_names, jobjects, pobjects):
             test_evaluation = EDAEvaluation.from_jobject(
                 jobject=evaluate_on_test(jobject=jobject, test_data=test_data),
                 data=test_data,
                 seed=seed
             )
+
+            preds = pobject.predict_proba(test_data)
+            actual_class = test_data.values(test_data.class_index)
+
+            str_preds_output = str_default_output.replace('.csv', '_%s.preds' % ens_name)
+
+            with open(os.path.join(this_path, 'overall', str_preds_output), 'w') as write_preds_file:
+                write_preds_file.write('classValue;%s\n' % ens_name)
+                for i in range(len(actual_class)):
+                    line_preds = ','.join([str(x) for x in preds[i]])
+
+                    write_preds_file.write(str(actual_class[i]) + ';' + line_preds + '\n')
 
             dict_metrics = dict()
             for metric_name, metric_aggregator in EDAEvaluation.metrics:
@@ -98,7 +118,7 @@ def process_fold_sample(
         collapsed = reduce(lambda x, y: x.append(y), dict_models.values())
         collapsed.to_csv(os.path.join(
                 this_path, 'overall',
-                'test_sample-%02.d_fold-%02.d.csv' % (n_sample, n_fold)), index=True
+                str_default_output), index=True
             )
 
     except Exception as e:

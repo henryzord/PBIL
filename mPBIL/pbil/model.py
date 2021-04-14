@@ -6,16 +6,17 @@ import inspect
 from deap import tools
 from deap.tools import HallOfFame
 
-# noinspection PyUnresolvedReferences
-from pbil import generation
-from pbil.generation import *
-# noinspection PyUnresolvedReferences
-from pbil.integration import *
-from pbil.evaluations import EDAEvaluator
-from pbil.individuals import Skeleton, Individual
-from pbil.ptypes import process_update
-from pbil.registry import PBILLogger
-from utils import *
+import mPBIL
+from mPBIL.pbil.generation import *
+from mPBIL.pbil.integration import *
+from weka.core.dataset import Instances
+from mPBIL.pbil.evaluations import EDAEvaluator
+from mPBIL.pbil.individuals import Skeleton, Individual
+from mPBIL.pbil.ptypes import process_update
+from mPBIL.pbil.registry import PBILLogger
+from mPBIL.utils import *
+import json
+import os
 
 
 class EarlyStop(object):
@@ -72,8 +73,8 @@ class PBIL(object):
         self.n_generations = n_generations  # type: int
         self.n_individuals = n_individuals  # type: int
 
-        clfs = [x[0] for x in inspect.getmembers(generation, inspect.isclass)]
-        classifier_names = [x for x in clfs if ClassifierWrapper in eval('generation.%s' % x).__bases__]
+        clfs = [x[0] for x in inspect.getmembers(mPBIL.pbil.generation, inspect.isclass)]
+        classifier_names = [x for x in clfs if ClassifierWrapper in eval('mPBIL.pbil.generation.%s' % x).__bases__]
 
         self.classifier_names = classifier_names  # type: list
         self.variables = json.load(open(os.path.join(resources_path, 'variables.json'), 'r'))  # type: dict
@@ -81,7 +82,7 @@ class PBIL(object):
         self.train_data = train_data  # type: Instances
         self.n_classes = len(self.train_data.class_attribute.values)
 
-        self.evaluator = EDAEvaluator(n_folds=5, train_data=self.train_data)
+        self.evaluator = EDAEvaluator(n_folds=0, train_data=self.train_data)
 
         self.n_generation = 0
 
