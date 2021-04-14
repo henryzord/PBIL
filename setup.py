@@ -32,7 +32,7 @@ setup(
     keywords="AUTO-ML, Machine Learning, Estimation of Distribution Algorithm",
     license="MIT License",
     url="https://github.com/henryzord/PBIL",
-    package_data={'mPBIL': ['mPBIL/resources/*']},
-    # include_package_data=True,
+    package_data={'mPBIL': ['resources/*']},
+    include_package_data=True,
 )
 
