@@ -271,7 +271,7 @@ class PBIL(object):
         best_skeleton = population[int(np.argmax(fitnesses))]  # type: Skeleton
         best_last = Individual(
             seed=seed, log=best_skeleton.log,
-            options=best_skeleton.options, train_data=self.train_data
+            options=best_skeleton.options, train_data=self.train_data, skip_evaluation=self.evaluator.n_folds == 0
         )
 
         skts = [self._hof[i] for i in range(len(self._hof))]
@@ -279,7 +279,7 @@ class PBIL(object):
         for i in range(len(skts)):
             ind = Individual(
                 seed=seed, log=skts[i].log,
-                options=skts[i].options, train_data=self.train_data
+                options=skts[i].options, train_data=self.train_data, skip_evaluation=self.evaluator.n_folds == 0
             )
             self._hof.insert(ind)
 

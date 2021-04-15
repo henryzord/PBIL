@@ -1,5 +1,7 @@
 import copy
 
+from weka.core.dataset import Instances
+
 from mPBIL.pbil.evaluations import EDAEvaluation, internal_5fcv
 from mPBIL.pbil.generation import *
 from mPBIL.pbil.integration import baseline_aggregator_options
@@ -28,8 +30,7 @@ class Skeleton(object):
         return ind
 
     @staticmethod
-    def from_sets(seed, jobject_ensemble, train_data):
-
+    def from_sets(seed, jobject_ensemble, train_data: Instances):
         train_evaluation_obj = internal_5fcv(seed=seed, jobject=jobject_ensemble, train_data=train_data)
         train_pevaluation = EDAEvaluation.from_jobject(train_evaluation_obj, data=train_data, seed=seed)
 
@@ -40,7 +41,7 @@ class Skeleton(object):
 
 
 class Individual(Skeleton):
-    def __init__(self, seed, log, options, train_data):
+    def __init__(self, seed, log, options, train_data, skip_evaluation=False):
         """
 
         :param log:
@@ -50,13 +51,18 @@ class Individual(Skeleton):
 
         _jobject_ensemble = Individual.__set_jobject_ensemble__(options=options, train_data=train_data)
 
-        train_evaluation = Skeleton.from_sets(
-            jobject_ensemble=_jobject_ensemble, train_data=train_data, seed=seed
-        )
+        if not skip_evaluation:
+            train_evaluation = Skeleton.from_sets(
+                jobject_ensemble=_jobject_ensemble, train_data=train_data, seed=seed
+            )
+            fitness = train_evaluation.unweighted_area_under_roc
+        else:
+            train_evaluation = None
+            fitness = 0
 
         super(Individual, self).__init__(
             seed=seed, log=log, options=options,
-            fitness=train_evaluation.unweighted_area_under_roc
+            fitness=fitness
         )
 
         self.train_evaluation = train_evaluation
@@ -70,7 +76,8 @@ class Individual(Skeleton):
             seed=copy.deepcopy(self.seed),
             log=copy.deepcopy(self.log),
             options=copy.deepcopy(self.options),
-            train_data=self._train_data
+            train_data=self._train_data,
+            skip_evaluation=self.fitness == 0
         )
         return ind
 
