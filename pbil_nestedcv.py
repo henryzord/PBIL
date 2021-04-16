@@ -194,7 +194,7 @@ def run_external_fold(
             raise some_exception
 
 
-def create_metadata_folder(metadata_path: str, dataset_name: str) -> str:
+def create_metadata_folder(some_args: argparse.Namespace, metadata_path: str, dataset_name: str) -> str:
     experiment_folder = dt.now().strftime('%Y-%m-%d-%H-%M-%S')
 
     os.mkdir(os.path.join(metadata_path, experiment_folder))
@@ -219,13 +219,11 @@ def stop_jvms(_):
 
 
 def main(args):
-    e = None
-
     n_jobs = args.n_jobs
     n_external_folds = 10  # TODO do not change this
     n_internal_folds = args.n_internal_folds
 
-    experiment_folder = create_metadata_folder(args.metadata_path, args.dataset_name)
+    experiment_folder = create_metadata_folder(args, args.metadata_path, args.dataset_name)
 
     if n_jobs == 1:
         print('WARNING: using single-thread.')
@@ -302,6 +300,6 @@ if __name__ == '__main__':
         type=int, choices=set(range(1, 11)), default=1
     )
 
-    some_args = parser.parse_args()
+    _some_args = parser.parse_args()
 
-    main(args=some_args)
+    main(args=_some_args)
