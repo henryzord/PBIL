@@ -30,48 +30,116 @@ This repository uses Anaconda as the default Python. You can download Anaconda
 
 Follow these steps to set up the development environment for the algorithm:
 
-1. Create a new conda environment: `conda create --name pbil`
-2. Activate it: `conda activate pbil`
-3. Install libraries: `conda install --file installation/conda_libraries.txt -c conda-forge` 
-4. Install graphviz:
+1. Install Java (JRE and JDK) from Oracle. The correct JDK version is **jdk-8u261-linux-x64.tar.gz** 
+   
+   On Linux (tested on Ubuntu 16.04):
 
-    i. On Ubuntu 16.04: `apt-get install graphviz libgraphviz-dev pkg-config`
-    
-    ii. On Windows: `conda install -c alubbock pygraphviz=1.5 graphviz=2.41`, then add path to graphviz installation to PATH variable: `<folder_to_anaconda_installation>/Anaconda3/pkgs/graphviz-2.41-0/Scripts`    
-    
-5. Install JRE and JDK. The correct JDK version is jdk-8u221-linux-x64.tar.gz. Tutorial available 
-[here](https://www.javahelps.com/2017/09/install-oracle-jdk-9-on-linux.html).  
-6. Install pip libraries: `pip install -r installation/pip_libraries.txt` (NOTE: this might require installing 
-Visual Studio with Python tools on Windows)
-7. Replace Weka from python-weka-wrapper library with provided Weka. This is needed since SimpleCart is not provided 
-with default Weka. On Weka, simply installing it as an additional package makes it available in the GUI; however the 
-wrapper still won't see it.
+   `tar -xf jdk-8u261-linux-x64.tar.gz`
+   
+   Then add the following lines to `~/.bashrc`:
+   
+   ``` 
+   export PATH=:~/jdk1.8.0_261/bin:$PATH
+   JAVA_HOME=~/jdk1.8.0_261/jre
+   ```
 
-    i. On Ubuntu:  `cp installation/weka.jar <folder_to_anaconda_installation>/anaconda3/envs/pbil/lib/python3.7/site-packages/weka/lib/`
-    ii. On Windows: `copy installation/weka.jar <folder_to_anaconda_installation>/Anaconda3/envs/pbil/Lib/site-packages/weka/lib/`
-    
-8. Unpack datasets. 
+2. If on Windows, install Visual Studio 14.0 with Python Tools. Add the path to the Visual Studio installation as an
+exception in your Anti-virus software.
 
-    a. On Ubuntu:
+3. Create a new conda environment: 
+   
+   `conda create --name pbil python==3.6.13`
+   
+4. Activate it: 
+   
+   `conda activate pbil`
+   
+5. Install conda libraries: 
+   
+   `conda install --file installation/conda_libraries.txt -c conda-forge`
+   
+6. Install graphviz and pygraphviz:
+
+    On Linux (tested on Ubuntu 16.04): 
+   
+   ```bash
+      apt-get install graphviz libgraphviz-dev pkg-config
+      conda install pygraphviz
+   ```
+   
+    On Windows (tested on Windows 10): 
+   
+   `conda install -c alubbock pygraphviz=1.5 graphviz=2.41`
+   
+   Then add path to graphviz installation to PATH variable: 
+   
+   `<folder_to_anaconda_installation>/Anaconda3/pkgs/graphviz-2.41-0/Scripts`    
     
-        i. Install 7zip: `apt-get install p7zip-full`
-        ii. Create folder for datasets: `mkdir keel_datasets_10fcv`  
-        iii. Unpack it: `7z x installation/keel_datasets_10fcv.7z -o.`
+7. Install pip libraries: 
+   
+   `pip install -r installation/pip_libraries.txt` 
+   
+8. Replace Weka from `python-weka-wrapper` library with provided Weka (in installation directory). This is needed since 
+SimpleCart is not provided with default Weka, and some functionalities are added to the default .jar. Here the .jar is provided,
+however the source code is [here](https://github.com/henryzord/WekaCustom/tree/comparative). 
+   
+  On Linux (tested on Ubuntu 16.04): 
+    
+    `cp installation/weka.jar <folder_to_anaconda_installation>/anaconda3/envs/autocve/lib/python3.7/site-packages/weka/lib/`
+    
+  On Windows (tested on Windows 10):
+    
+    `copy installation\weka.jar <folder_to_anaconda_installation>\Anaconda3\envs\autocve\Lib\site-packages\weka\lib\`
+
+9. Install mPBIL:
+
+   ```bash
+   cd PBIL
+   conda activate pbil
+   pip install .
+   ```
+
+10. Unpack datasets 
+
+   On Linux (tested on Ubuntu 16.04):
+    
+      Install 7zip: 
+         
+      `apt-get install p7zip-full`
+    
+      Create folder for datasets: 
+    
+      `mkdir keel_datasets_10fcv`  
+      
+      Unpack it: 
+    
+      `7z x installation/keel_datasets_10fcv.7z -o.`
+
+   ---
+
+    On Windows (tested on Windows 10):
+    
+      Install 7zip from [here](https://www.7-zip.org/download.html)
+      
+      Add path to installation to PATH variable: 
+      
+      `C:\Program Files\7-Zip`
+ 
+      Create folder for datasets: 
+ 
+      `mkdir keel_datasets_10fcv`
+      
+      Unpack it: 
+ 
+      `7z x installation\keel_datasets_10fcv.7z -o.`
         
-    b. On Windows:
-    
-        i. Install 7zip: https://www.7-zip.org/download.html
-        ii. Add path to installation to PATH variable: `C:\Program Files\7-Zip`
-        iii. Create folder for datasets: `mkdir keel_datasets_10fcv`
-        iv. Unpack it: `7z x installation\keel_datasets_10fcv.7z -o.`
-        
-9. Create metadata path: `mkdir metadata`
+11. Create metadata path: `mkdir metadata`
 
 ## Running
   
 ### Running the experiments in the paper
-  
-Once installed, you can call the script `main.py` in root folder to run the tests that were used in the paper.
+
+Once installed, you can call the script `main.py` script under mPBIL folderto run the tests that were used in the paper.
 A successful call to the algorithm in the command line looks as follows:
 
 ```
@@ -79,7 +147,12 @@ python main.py --datasets-path keel_datasets_10fcv --datasets-names german --met
 --resources-path resources --n-jobs 1 --heap-size 4g --n-generations 2 --n-individuals 10 --n-samples 1 
 --learning-rate 0.5 --selection-share 0.5 
 ```
-  
+
+### Running nested cross-validation
+
+You can call the bash script `nestedcv_pbil.sh` for running the nested cross-validation proposed in the 
+[EDNEL](https://github.com/henryzord/ednel) algorithm, which is compared to PBIL.
+
 ### Just using the algorithm as-is
 
 On the other hand, if you do not want to reproduce the experiments presented in the paper, you can use the algorithm 
