@@ -84,7 +84,7 @@ SimpleCart is not provided with default Weka, and some functionalities are added
 however the source code is [here](https://github.com/henryzord/WekaCustom/tree/comparative). 
    
   On Linux (tested on Ubuntu 16.04): 
-    
+
     `cp installation/weka.jar <folder_to_anaconda_installation>/anaconda3/envs/autocve/lib/python3.7/site-packages/weka/lib/`
     
   On Windows (tested on Windows 10):
