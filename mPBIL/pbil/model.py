@@ -15,17 +15,25 @@ from mPBIL.pbil.individuals import Skeleton, Individual
 from mPBIL.pbil.ptypes import process_update
 from mPBIL.pbil.registry import PBILLogger
 from mPBIL.utils import *
+from datetime import datetime as dt
 import json
 import os
 
 
 class EarlyStop(object):
-    def __init__(self):
+    def __init__(self, timeout):
         self.n_early_stop = 10
         self.tolerance = 0.005
         self.last_bests = np.linspace(0, 1, num=self.n_early_stop)
+        self.start = dt.now()
+        self.timeout = timeout
 
     def is_stopping(self):
+        t2 = dt.now()
+
+        if (t2 - self.start).total_seconds() > self.timeout:
+            return True
+
         return abs(self.last_bests.max() - self.last_bests.min()) < self.tolerance
 
     def update(self, halloffame, gen):
@@ -41,7 +49,7 @@ class PBIL(object):
 
     def __init__(self,
                  resources_path, train_data, lr=0.7, selection_share=0.5, n_generations=200, n_individuals=75,
-                 log_path=None
+                 log_path=None, timeout=3600, timeout_individual=60
                  ):
         """
         Initializes a new instance of PBIL ensemble learning classifier.
@@ -66,12 +74,18 @@ class PBIL(object):
         :type n_individuals: int
         :param log_path: Optional: path to where metadata from this run should be stored.
         :type log_path: str
+        :param timeout: Optional: maximum allowed time for algorithm to run. Defaults to 3600 seconds (one hour)
+        :type timeout: int
+        :param timeout_individual: Optional: maximum allowed time for an individual to be trained. Defaults to 60 seconds
+        :type timeout: int
         """
 
         self.lr = lr  # type: float
         self.selection_share = selection_share  # type: float
         self.n_generations = n_generations  # type: int
         self.n_individuals = n_individuals  # type: int
+        self.timeout = timeout  # type: int
+        self.timeout_individual = timeout_individual  # type: int
 
         clfs = [x[0] for x in inspect.getmembers(mPBIL.pbil.generation, inspect.isclass)]
         classifier_names = [x for x in clfs if ClassifierWrapper in eval('mPBIL.pbil.generation.%s' % x).__bases__]
@@ -123,10 +137,19 @@ class PBIL(object):
             ilogs = [x.log for x in self._hof]
             self._hof.clear()
 
-        for j in range(n_individuals):
+        counter_individuals = 0
+        while counter_individuals < n_individuals:
+            discard = False
+
+            start = dt.now()
+
             ilog = dict()
 
             for classifier_name in self.classifier_names:
+                if (dt.now() - start).total_seconds() > self.timeout_individual:
+                    discard = True
+                    break
+
                 ilog[classifier_name] = np.random.choice(
                     a=self.variables[classifier_name]['params']['a'],
                     p=self.variables[classifier_name]['params']['p']
@@ -141,6 +164,9 @@ class PBIL(object):
                 else:
                     parameters[classifier_name].append([])
 
+            if discard:
+                continue
+
             ilog['Aggregator'] = np.random.choice(
                 a=self.variables['Aggregator']['params']['a'], p=self.variables['Aggregator']['params']['p']
             )
@@ -150,6 +176,7 @@ class PBIL(object):
             parameters['Aggregator'] += [[ilog['Aggregator']] + agg_options]
 
             ilogs += [ilog]
+            counter_individuals += 1
 
         train_aucs = self.evaluator.get_unweighted_aucs(seed=seed, parameters=parameters)
 
@@ -238,10 +265,12 @@ class PBIL(object):
         Do not use this method.
         """
 
-        logbook = tools.Logbook()
-        logbook.header = ['gen', 'nevals'] + (stats.fields if stats else [])
+        t1 = dt.now()
 
-        early = EarlyStop()
+        logbook = tools.Logbook()
+        logbook.header = ['gen', 'nevals', 'elapsed_time'] + (stats.fields if stats else [])
+
+        early = EarlyStop(self.timeout)
 
         population = []
         for gen in range(ngen):
@@ -260,7 +289,10 @@ class PBIL(object):
             self.update(population=population)
 
             record = stats.compile(population) if stats is not None else {}
-            logbook.record(gen=gen, nevals=len(population), **record)
+            t2 = dt.now()
+            logbook.record(gen=gen, nevals=len(population), elapsed_time=round((t2 - t1).total_seconds()), **record)
+            t1 = dt.now()
+
             if verbose:
                 print(logbook.stream)
 
