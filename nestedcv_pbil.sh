@@ -6,7 +6,7 @@ python pbil_nestedcv.py --n-internal-folds 5 --n-jobs 10 --heap-size 4g --datase
 python pbil_nestedcv.py --n-internal-folds 5 --n-jobs 10 --heap-size 4g --dataset-name diabetic --metadata-path /A/henry/pbil/metadata/pbil_nestedcv --datasets-path /home/henry/Projects/ednel/keel_datasets_10fcv
 python pbil_nestedcv.py --n-internal-folds 5 --n-jobs 10 --heap-size 4g --dataset-name flare --metadata-path /A/henry/pbil/metadata/pbil_nestedcv --datasets-path /home/henry/Projects/ednel/keel_datasets_10fcv
 python pbil_nestedcv.py --n-internal-folds 5 --n-jobs 10 --heap-size 4g --dataset-name krvskp --metadata-path /A/henry/pbil/metadata/pbil_nestedcv --datasets-path /home/henry/Projects/ednel/keel_datasets_10fcv
-python pbil_nestedcv.py --n-internal-folds 5 --n-jobs 10 --heap-size 4g --dataset-name page --metadata-path /A/henry/pbil/metadata/pbil_nestedcv --datasets-path /home/henry/Projects/ednel/keel_datasets_10fcv
+python pbil_nestedcv.py --n-internal-folds 5 --n-jobs 10 --heap-size 4g --dataset-name page-blocks --metadata-path /A/henry/pbil/metadata/pbil_nestedcv --datasets-path /home/henry/Projects/ednel/keel_datasets_10fcv
 python pbil_nestedcv.py --n-internal-folds 5 --n-jobs 10 --heap-size 4g --dataset-name penbased --metadata-path /A/henry/pbil/metadata/pbil_nestedcv --datasets-path /home/henry/Projects/ednel/keel_datasets_10fcv
 python pbil_nestedcv.py --n-internal-folds 5 --n-jobs 10 --heap-size 4g --dataset-name phoneme --metadata-path /A/henry/pbil/metadata/pbil_nestedcv --datasets-path /home/henry/Projects/ednel/keel_datasets_10fcv
 python pbil_nestedcv.py --n-internal-folds 5 --n-jobs 10 --heap-size 4g --dataset-name ring --metadata-path /A/henry/pbil/metadata/pbil_nestedcv --datasets-path /home/henry/Projects/ednel/keel_datasets_10fcv
