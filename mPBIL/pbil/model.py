@@ -31,7 +31,8 @@ class EarlyStop(object):
     def is_stopping(self):
         t2 = dt.now()
 
-        if (t2 - self.start).total_seconds() > self.timeout:
+        # if a timeout parameter is set, and the evolutionary process is taking longer than this parameter
+        if (self.timeout > 0) and ((t2 - self.start).total_seconds() > self.timeout):
             return True
 
         return abs(self.last_bests.max() - self.last_bests.min()) < self.tolerance
@@ -146,7 +147,9 @@ class PBIL(object):
             ilog = dict()
 
             for classifier_name in self.classifier_names:
-                if (dt.now() - start).total_seconds() > self.timeout_individual:
+                # if a timeout_individual parameter is set and
+                # the induction time of this individual takes longer than it
+                if (self.timeout_individual > 0) and ((dt.now() - start).total_seconds() > self.timeout_individual):
                     discard = True
                     break
 
