@@ -12,18 +12,20 @@ from mPBIL.utils import from_python_stringlist_to_java_stringlist
 
 
 class EDAEvaluator(object):
-    def __init__(self, n_folds, train_data):
+    def __init__(self, n_folds, train_data, fitness_metric):
         self.n_classes = len(train_data.attribute(train_data.class_index).values)
         self.train_data = train_data
         self.n_folds = n_folds
+        self.fitness_metric = fitness_metric
 
         self.evaluator = javabridge.make_instance(
-            "Leda/EDAEvaluator;", "(ILweka/core/Instances;)V",
+            "Leda/EDAEvaluator;", "(ILweka/core/Instances;Ljava/lang/String;)V",
             self.n_folds,
-            self.train_data.jobject
+            self.train_data.jobject,
+            self.fitness_metric
         )
 
-    def get_unweighted_aucs(self, seed, parameters):
+    def get_fitness_scores(self, seed, parameters):
         res = javabridge.call(
             self.evaluator, "evaluateEnsembles", "(I" + 7 * "[[Ljava/lang/String;" + ")[D", seed,
             from_python_stringlist_to_java_stringlist(parameters['J48']),

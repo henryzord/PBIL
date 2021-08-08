@@ -34,6 +34,8 @@ def get_pbil_combinations():
     timeout = 3600  # one hour
     timeout_individual = 60
 
+    n_folds = 0  # holdout
+
     for learning_rate in learning_rate_values:
         for selection_share in selection_share_values:
             comb = {
@@ -42,7 +44,8 @@ def get_pbil_combinations():
                 "n_individuals": n_individuals,
                 "n_generations": n_generations,
                 "timeout": timeout,
-                "timeout_individual": timeout_individual
+                "timeout_individual": timeout_individual,
+                "n_folds": n_folds
             }
             combinations += [comb]
 
@@ -130,7 +133,8 @@ def run_external_fold(
                     train_data=internal_train_data,
                     lr=comb['learning_rate'], selection_share=comb['selection_share'],
                     n_generations=comb['n_generations'], n_individuals=comb['n_individuals'],
-                    timeout=comb['timeout'], timeout_individual=comb['timeout_individual']
+                    timeout=comb['timeout'], timeout_individual=comb['timeout_individual'],
+                    n_folds=comb['n_folds']
                 )
 
                 overall, last = pbil.run(1)
@@ -164,7 +168,8 @@ def run_external_fold(
             lr=combinations[best_index]['learning_rate'], selection_share=combinations[best_index]['selection_share'],
             n_generations=combinations[best_index]['n_generations'],
             n_individuals=combinations[best_index]['n_individuals'],
-            timeout=combinations[best_index]['timeout'], timeout_individual=combinations[best_index]['timeout_individual']
+            timeout=combinations[best_index]['timeout'], timeout_individual=combinations[best_index]['timeout_individual'],
+            n_folds=combinations[best_index]['n_folds']
         )
 
         overall, last = pbil.run(1)

@@ -50,7 +50,7 @@ class PBIL(object):
 
     def __init__(self,
                  resources_path, train_data, lr=0.7, selection_share=0.5, n_generations=200, n_individuals=75,
-                 log_path=None, timeout=3600, timeout_individual=60
+                 log_path=None, timeout=3600, timeout_individual=60, n_folds=5, fitness_metric='unweighted_auc'
                  ):
         """
         Initializes a new instance of PBIL ensemble learning classifier.
@@ -79,6 +79,12 @@ class PBIL(object):
         :type timeout: int
         :param timeout_individual: Optional: maximum allowed time for an individual to be trained. Defaults to 60 seconds
         :type timeout: int
+        :param n_folds: Optional: number of folds to use when evaluating individual fitness. Use 0 for 80-20 holdout,
+        1 for leave-one-out, or >=2 for internal cross validation. Defaults to 5 folds
+        :type n_folds: int
+        :param fitness_metric: Optional: fitness metric to be used. Supports 'unweighted_auc' and 'balanced_accuracy'.
+        Defaults to 'unweighted_auc'
+        :type fitness_metric: str
         """
 
         self.lr = lr  # type: float
@@ -97,7 +103,7 @@ class PBIL(object):
         self.train_data = train_data  # type: Instances
         self.n_classes = len(self.train_data.class_attribute.values)
 
-        self.evaluator = EDAEvaluator(n_folds=0, train_data=self.train_data)
+        self.evaluator = EDAEvaluator(n_folds=n_folds, train_data=self.train_data, fitness_metric=fitness_metric)
 
         self.n_generation = 0
 
@@ -181,7 +187,7 @@ class PBIL(object):
             ilogs += [ilog]
             counter_individuals += 1
 
-        train_aucs = self.evaluator.get_unweighted_aucs(seed=seed, parameters=parameters)
+        train_fitness = self.evaluator.get_fitness_scores(seed=seed, parameters=parameters)
 
         # hall of fame is put in the front
         for i in range(0, len_hall):
@@ -191,7 +197,7 @@ class PBIL(object):
                 seed=seed,
                 log=ilogs[i],
                 options=local_options,
-                fitness=train_aucs[i]
+                fitness=train_fitness[i]
             ))
         population = []
         for i in range(len_hall, n_individuals + len_hall):
@@ -201,7 +207,7 @@ class PBIL(object):
                 seed=seed,
                 log=ilogs[i],
                 options=local_options,
-                fitness=train_aucs[i]
+                fitness=train_fitness[i]
             )]
 
         return population

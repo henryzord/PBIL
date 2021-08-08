@@ -85,11 +85,11 @@ however the source code is [here](https://github.com/henryzord/WekaCustom/tree/c
    
   On Linux (tested on Ubuntu 16.04): 
 
-    `cp installation/weka.jar <folder_to_anaconda_installation>/anaconda3/envs/autocve/lib/python3.7/site-packages/weka/lib/`
+    `cp installation/weka.jar <folder_to_anaconda_installation>/anaconda3/envs/pbil/lib/python3.7/site-packages/weka/lib/`
     
   On Windows (tested on Windows 10):
     
-    `copy installation\weka.jar <folder_to_anaconda_installation>\Anaconda3\envs\autocve\Lib\site-packages\weka\lib\`
+    `copy installation\weka.jar <folder_to_anaconda_installation>\Anaconda3\envs\pbil\Lib\site-packages\weka\lib\`
 
 9. Install mPBIL:
 
