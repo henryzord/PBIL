@@ -1,0 +1,15 @@
+python autocve_procedure.py --dataset-name 15 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 37 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 307 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 451 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 458 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 469 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 1476 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 1485 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 1515 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 1590 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 6332 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 23517 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 40496 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 40499 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
+python autocve_procedure.py --dataset-name 40994 --datasets-path /A/henry/ednel/metadata/ednel_holdout/datasets --metadata_path /A/henry/pbil/metadata/pbil_holdout/metadata --n_jobs 10
