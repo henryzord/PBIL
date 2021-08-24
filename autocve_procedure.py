@@ -87,8 +87,6 @@ def run_holdout(
     some_exception = None  # type: Exception
 
     try:
-        seed = Random(1)
-
         train_data = read_dataset(
             os.path.join(
                 datasets_path,
@@ -103,11 +101,16 @@ def run_holdout(
             )
         )  # type: Instances
 
-        class_unique_values = np.array(train_data.attribute(train_data.class_index).values)
+        # class_unique_values = np.array(train_data.attribute(train_data.class_index).values)
 
         combination = get_pbil_combination()  # type: dict
 
-        os.mkdir(os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_%02d_fold_00' % n_trial))
+        good = True
+        try:
+            os.mkdir(os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_%02d_fold_00' % n_trial))
+        except:
+            good = False
+
 
         pbil = PBIL(
             resources_path=os.path.join(sys.modules['mPBIL'].__path__[0], 'resources'),
@@ -117,13 +120,17 @@ def run_holdout(
             n_individuals=combination['n_individuals'],
             timeout=combination['timeout'], timeout_individual=combination['timeout_individual'],
             n_folds=combination['n_folds'], fitness_metric=combination['fitness_metric'],
-            log_path=os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_%02d_fold_00' % n_trial)
+            log_path=os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_%02d_fold_00' % n_trial) if good else None
         )
 
         _, clf = pbil.run(1)
 
-        pbil.logger.individual_to_file(individual=clf, individual_name='last', step=pbil.n_generation)
-        pbil.logger.probabilities_to_file()
+        if good:
+            try:
+                pbil.logger.individual_to_file(individual=clf, individual_name='last', step=pbil.n_generation)
+                pbil.logger.probabilities_to_file()
+            except:
+                pass
 
         external_preds = list(map(list, clf.predict_proba(test_data)))
         external_actual_classes = list(test_data.values(test_data.class_index).astype(np.int))
