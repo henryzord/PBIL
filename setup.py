@@ -21,7 +21,7 @@ setup(
     ],
     description="PBIL is an EDA for optimizing interpretable classifiers hyper-parameters",
     # ext_modules=[PBIL_modulename],
-    install_requires=['graphviz==0.11.1', 'pygraphviz==1.5', 'javabridge==1.0.18', 'python-weka-wrapper3==0.1.7',
+    install_requires=['graphviz>=0.11.1', 'pygraphviz>=1.5', 'javabridge==1.0.18', 'python-weka-wrapper3==0.1.7',
                       'matplotlib>=2.2.3', 'networkx==2.2', 'numpy>=1.16.1', 'pandas>=0.23.4', 'scipy>=1.2.0',
                       'scikit-learn>=0.20.2', 'deap==1.2.2', 'tensorflow==1.13.1', 'tensorboard==1.13.1',
                       'psutil==5.6.2',
