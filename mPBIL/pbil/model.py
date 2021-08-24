@@ -108,7 +108,9 @@ class PBIL(object):
         self.train_data = train_data  # type: Instances
         self.n_classes = len(self.train_data.class_attribute.values)
 
-        self.evaluator = EDAEvaluator(n_folds=n_folds, train_data=self.train_data, fitness_metric=fitness_metric)
+        self.fitness_metric = fitness_metric
+
+        self.evaluator = EDAEvaluator(n_folds=n_folds, train_data=self.train_data, fitness_metric=self.fitness_metric)
 
         self.n_generation = 0
 
@@ -325,7 +327,7 @@ class PBIL(object):
 
         best_skeleton = population[int(np.argmax(fitnesses))]  # type: Skeleton
         best_last = Individual(
-            seed=seed, log=best_skeleton.log,
+            seed=seed, log=best_skeleton.log, fitness_metric=self.fitness_metric,
             options=best_skeleton.options, train_data=self.train_data, skip_evaluation=self.evaluator.n_folds == 0
         )
 
@@ -333,7 +335,7 @@ class PBIL(object):
         self._hof.clear()
         for i in range(len(skts)):
             ind = Individual(
-                seed=seed, log=skts[i].log,
+                seed=seed, log=skts[i].log, fitness_metric=self.fitness_metric,
                 options=skts[i].options, train_data=self.train_data, skip_evaluation=self.evaluator.n_folds == 0
             )
             self._hof.insert(ind)

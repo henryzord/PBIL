@@ -162,6 +162,8 @@ def run_external_fold(
         uses_overall = overall_aucs[best_overall] > last_aucs[best_last]
         best_index = best_overall if uses_overall else best_last  # type: int
 
+        os.mkdir(os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_01_fold_%02d' % n_external_fold))
+
         pbil = PBIL(
             resources_path=os.path.join(sys.modules['mPBIL'].__path__[0], 'resources'),
             train_data=external_train_data,
@@ -169,12 +171,17 @@ def run_external_fold(
             n_generations=combinations[best_index]['n_generations'],
             n_individuals=combinations[best_index]['n_individuals'],
             timeout=combinations[best_index]['timeout'], timeout_individual=combinations[best_index]['timeout_individual'],
-            n_folds=combinations[best_index]['n_folds']
+            n_folds=combinations[best_index]['n_folds'],
+            log_path=os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_01_fold_%02d' % n_external_fold)
         )
 
         overall, last = pbil.run(1)
 
         clf = overall if uses_overall else last
+
+        pbil.logger.individual_to_file(individual=clf, individual_name='last' if not uses_overall else 'overall', step=pbil.n_generation)
+        pbil.logger.probabilities_to_file()
+
         external_preds = list(map(list, clf.predict_proba(external_test_data)))
         external_actual_classes = list(external_test_data.values(external_test_data.class_index).astype(np.int))
 

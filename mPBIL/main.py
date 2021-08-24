@@ -67,12 +67,12 @@ def process_fold_sample(
 
             # noinspection PyUnusedLocal
             baseline = Individual.from_baseline(
-                seed=seed, classifiers=[clf for clf in pbil.classifier_names if overall.log[clf]],
+                seed=seed, fitness_metric=fitness_metric, classifiers=[clf for clf in pbil.classifier_names if overall.log[clf]],
                 train_data=train_data
             )
         else:
             baseline = Individual.from_baseline(
-                seed=seed, classifiers=['J48', 'SimpleCart', 'PART', 'JRip', 'DecisionTable'],
+                seed=seed, fitness_metric=fitness_metric, classifiers=['J48', 'SimpleCart', 'PART', 'JRip', 'DecisionTable'],
                 train_data=train_data
             )
 

@@ -41,7 +41,7 @@ class Skeleton(object):
 
 
 class Individual(Skeleton):
-    def __init__(self, seed, log, options, train_data, skip_evaluation=False):
+    def __init__(self, seed, log, fitness_metric, options, train_data, skip_evaluation=False):
         """
 
         :param log:
@@ -49,7 +49,11 @@ class Individual(Skeleton):
         :param train_data:
         """
 
-        _jobject_ensemble = Individual.__set_jobject_ensemble__(options=options, train_data=train_data)
+        self.fitness_metric = fitness_metric
+
+        _jobject_ensemble = Individual.__set_jobject_ensemble__(
+            fitness_metric=fitness_metric, options=options, train_data=train_data
+        )
 
         if not skip_evaluation:
             train_evaluation = Skeleton.from_sets(
@@ -75,6 +79,7 @@ class Individual(Skeleton):
         ind = Individual(
             seed=copy.deepcopy(self.seed),
             log=copy.deepcopy(self.log),
+            fitness_metric=copy.deepcopy(self.fitness_metric),
             options=copy.deepcopy(self.options),
             train_data=self._train_data,
             skip_evaluation=self.fitness == 0
@@ -97,13 +102,16 @@ class Individual(Skeleton):
         return clfs
 
     @staticmethod
-    def __set_jobject_ensemble__(options, train_data):
+    def __set_jobject_ensemble__(fitness_metric: str, options, train_data):
         opts = []
         for flag, listoptions in options.items():
             opts.extend(['-' + flag, ' '.join(listoptions)])
 
         eda_ensemble = javabridge.make_instance(
-            'Leda/EDAEnsemble;', '([Ljava/lang/String;Lweka/core/Instances;)V', opts, train_data.jobject
+            'Leda/EDAEnsemble;',
+            '(IILjava/time/LocalDateTime;Ljava/lang/String;[Ljava/lang/String;Lweka/core/Instances;)V',
+            0, 0, None, fitness_metric,
+            opts, train_data.jobject
         )
         return eda_ensemble
 
@@ -153,11 +161,11 @@ class Individual(Skeleton):
         return clf_texts
 
     @classmethod
-    def from_baseline(cls, seed, classifiers, train_data):
+    def from_baseline(cls, seed, fitness_metric, classifiers, train_data):
         options, ilog = baseline_classifiers_options(classifiers)
         aggoptions, agglog = baseline_aggregator_options(None)
         options.update(aggoptions)
         ilog.update(agglog)
 
-        ind = Individual(seed=seed, log=ilog, options=options, train_data=train_data)
+        ind = Individual(seed=seed, log=ilog, fitness_metric=fitness_metric, options=options, train_data=train_data)
         return ind
