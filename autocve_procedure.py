@@ -115,7 +115,7 @@ def run_holdout(
             n_individuals=combination['n_individuals'],
             timeout=combination['timeout'], timeout_individual=combination['timeout_individual'],
             n_folds=combination['n_folds'], fitness_metric=combination['fitness_metric'],
-            log_path=os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_%02d_fold_00' % n_trial) if good else None
+            log_path=os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_%02d_fold_00' % n_trial)
         )
 
         _, clf = pbil.run(1)
