@@ -25,10 +25,10 @@ class EDAEvaluator(object):
             self.fitness_metric
         )
 
-    def get_fitness_scores(self, seed, parameters, timeout: int, start_time: str):
+    def get_fitness_scores(self, seed, parameters, timeout: int, timeout_individual: int, start_time: str):
         res = javabridge.call(
-            self.evaluator, "evaluateEnsembles", "(IILjava/lang/String;" + 7 * "[[Ljava/lang/String;" + ")[D",
-            seed, timeout, start_time,
+            self.evaluator, "evaluateEnsembles", "(IIILjava/lang/String;" + 7 * "[[Ljava/lang/String;" + ")[D",
+            seed, timeout, timeout_individual, start_time,
             from_python_stringlist_to_java_stringlist(parameters['J48']),
             from_python_stringlist_to_java_stringlist(parameters['SimpleCart']),
             from_python_stringlist_to_java_stringlist(parameters['REPTree']),

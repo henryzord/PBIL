@@ -199,7 +199,8 @@ class PBIL(object):
 
         train_fitness = self.evaluator.get_fitness_scores(
             seed=seed, parameters=parameters,
-            timeout=early_stop.timeout, start_time=early_stop.start.strftime('%Y-%m-%d-%H-%M-%S')
+            timeout=early_stop.timeout, timeout_individual=self.timeout_individual,
+            start_time=early_stop.start.strftime('%Y-%m-%d-%H-%M-%S')
         )
 
         # hall of fame is put in the front
