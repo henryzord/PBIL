@@ -1,4 +1,2 @@
-graphviz==0.11.1
-pygraphviz==1.5
 javabridge==1.0.18
 python-weka-wrapper3==0.1.7
