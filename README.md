@@ -69,24 +69,11 @@ exception in your Anti-virus software.
    conda install -c alubbock pygraphviz=1.5 graphviz=2.41
    ```
 
-6. Install graphviz and pygraphviz:
-
-     
-
-   ```bash
-      apt-get install graphviz libgraphviz-dev pkg-config
-      conda install pygraphviz
-   ```
-
-   Then add path to graphviz installation to PATH variable: 
-   
-   `<folder_to_anaconda_installation>/Anaconda3/pkgs/graphviz-2.41-0/Scripts`    
-    
-7. Install pip libraries: 
+6. Install pip libraries: 
    
    `pip install -r installation/pip_libraries.txt` 
    
-8. Replace Weka from `python-weka-wrapper` library with provided Weka (in installation directory). This is needed since 
+7. Replace Weka from `python-weka-wrapper` library with provided Weka (in installation directory). This is needed since 
 SimpleCart is not provided with default Weka, and some functionalities are added to the default .jar. Here the .jar is provided,
 however the source code is [here](https://github.com/henryzord/WekaCustom/tree/comparative). 
    
@@ -102,7 +89,7 @@ however the source code is [here](https://github.com/henryzord/WekaCustom/tree/c
   copy installation\weka.jar <folder_to_anaconda_installation>\Anaconda3\envs\pbil\Lib\site-packages\weka\lib\
   ```
 
-9. Install mPBIL:
+8. Install mPBIL:
 
    ```bash
    cd PBIL
@@ -110,7 +97,7 @@ however the source code is [here](https://github.com/henryzord/WekaCustom/tree/c
    pip install .
    ```
 
-10. Unpack datasets 
+9. Unpack datasets 
 
    On Linux (tested on Ubuntu 16.04):
     
@@ -144,7 +131,7 @@ however the source code is [here](https://github.com/henryzord/WekaCustom/tree/c
  
       `7z x installation\keel_datasets_10fcv.7z -o.`
         
-11. Create metadata path: `mkdir metadata`
+10. Create metadata path: `mkdir metadata`
 
 ## Running
   

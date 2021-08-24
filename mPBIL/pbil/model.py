@@ -28,11 +28,16 @@ class EarlyStop(object):
         self.start = dt.now()
         self.timeout = timeout
 
-    def is_stopping(self):
-        t2 = dt.now()
+    def is_overtime(self):
+        """
+        if a timeout parameter is set, and the evolutionary process is taking longer than this parameter
+        """
+        if (self.timeout > 0) and ((dt.now() - self.start).total_seconds() > self.timeout):
+            return True
+        return False
 
-        # if a timeout parameter is set, and the evolutionary process is taking longer than this parameter
-        if (self.timeout > 0) and ((t2 - self.start).total_seconds() > self.timeout):
+    def is_stopping(self):
+        if self.is_overtime():
             return True
 
         return abs(self.last_bests.max() - self.last_bests.min()) < self.tolerance
@@ -119,7 +124,7 @@ class PBIL(object):
         else:
             self.logger = None
 
-    def sample_and_evaluate(self, seed, n_individuals):
+    def sample_and_evaluate(self, seed, n_individuals, early_stop):
         """
         Samples new individuals from graphical model.
 
@@ -128,6 +133,8 @@ class PBIL(object):
         :type seed: int
         :param n_individuals: Number of individuals to sample.
         :type n_individuals: int
+        :param early_stop: A EarlyStop instance, to check for time
+        :type early_stop: EarlyStop
         :return: the recently sampled population
         :rtype: list
         """
@@ -146,6 +153,9 @@ class PBIL(object):
 
         counter_individuals = 0
         while counter_individuals < n_individuals:
+            if early_stop.is_overtime():
+                break
+
             discard = False
 
             start = dt.now()
@@ -187,7 +197,10 @@ class PBIL(object):
             ilogs += [ilog]
             counter_individuals += 1
 
-        train_fitness = self.evaluator.get_fitness_scores(seed=seed, parameters=parameters)
+        train_fitness = self.evaluator.get_fitness_scores(
+            seed=seed, parameters=parameters,
+            timeout=early_stop.timeout, start_time=early_stop.start.strftime('%Y-%m-%d-%H-%M-%S')
+        )
 
         # hall of fame is put in the front
         for i in range(0, len_hall):
@@ -289,7 +302,7 @@ class PBIL(object):
 
             # Generate a new population, already evaluated; re-evaluates halloffame with new seed
             population = self.sample_and_evaluate(
-                seed=seed, n_individuals=self.n_individuals
+                seed=seed, n_individuals=self.n_individuals, early_stop=early
             )
 
             self._hof.update(population)
