@@ -84,73 +84,65 @@ def get_params(args: argparse.Namespace) -> dict:
 def run_holdout(
         n_trial: int, dataset_name: str, datasets_path: str, metadata_path: str, experiment_folder: str
 ):
-    some_exception = None  # type: Exception
 
-    try:
-        train_data = read_dataset(
-            os.path.join(
-                datasets_path,
-                'dataset_%s_trial_%02d_train.arff' % (dataset_name, n_trial)
-            )
-        )  # type: Instances
-
-        test_data = read_dataset(
-            os.path.join(
-                datasets_path,
-                'dataset_%s_trial_%02d_test.arff' % (dataset_name, n_trial)
-            )
-        )  # type: Instances
-
-        # class_unique_values = np.array(train_data.attribute(train_data.class_index).values)
-
-        combination = get_pbil_combination()  # type: dict
-
-        os.mkdir(os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_%02d_fold_00' % n_trial))
-
-        pbil = PBIL(
-            resources_path=os.path.join(sys.modules['mPBIL'].__path__[0], 'resources'),
-            train_data=train_data,
-            lr=combination['learning_rate'], selection_share=combination['selection_share'],
-            n_generations=combination['n_generations'],
-            n_individuals=combination['n_individuals'],
-            timeout=combination['timeout'], timeout_individual=combination['timeout_individual'],
-            n_folds=combination['n_folds'], fitness_metric=combination['fitness_metric'],
-            log_path=os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_%02d_fold_00' % n_trial)
+    train_data = read_dataset(
+        os.path.join(
+            datasets_path,
+            'dataset_%s_trial_%02d_train.arff' % (dataset_name, n_trial)
         )
+    )  # type: Instances
 
-        _, clf = pbil.run(1)
+    test_data = read_dataset(
+        os.path.join(
+            datasets_path,
+            'dataset_%s_trial_%02d_test.arff' % (dataset_name, n_trial)
+        )
+    )  # type: Instances
 
-        pbil.logger.individual_to_file(individual=clf, individual_name='last', step=pbil.n_generation)
-        pbil.logger.probabilities_to_file()
+    # class_unique_values = np.array(train_data.attribute(train_data.class_index).values)
 
-        external_preds = list(map(list, clf.predict_proba(test_data)))
-        external_actual_classes = list(test_data.values(test_data.class_index).astype(np.int))
+    combination = get_pbil_combination()  # type: dict
 
-        with open(
-                os.path.join(metadata_path, experiment_folder, dataset_name,
-                             'test_sample-%02d_fold-00_parameters.json' % n_trial),
-                'w'
-        ) as write_file:
-            dict_best_params = deepcopy(combination)
-            dict_best_params['individual'] = 'last'
-            for k in dict_best_params.keys():
-                dict_best_params[k] = str(dict_best_params[k])
+    os.mkdir(os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_%02d_fold_00' % n_trial))
 
-            json.dump(dict_best_params, write_file, indent=2)
+    pbil = PBIL(
+        resources_path=os.path.join(sys.modules['mPBIL'].__path__[0], 'resources'),
+        train_data=train_data,
+        lr=combination['learning_rate'], selection_share=combination['selection_share'],
+        n_generations=combination['n_generations'],
+        n_individuals=combination['n_individuals'],
+        timeout=combination['timeout'], timeout_individual=combination['timeout_individual'],
+        n_folds=combination['n_folds'], fitness_metric=combination['fitness_metric'],
+        log_path=os.path.join(metadata_path, experiment_folder, dataset_name, 'sample_%02d_fold_00' % n_trial)
+    )
 
-        with open(
-                os.path.join(metadata_path, experiment_folder, dataset_name, 'overall',
-                             'test_sample-%02d_fold-00_last.preds' % n_trial)
-                , 'w') as write_file:
-            write_file.write('classValue;Individual\n')
-            for i in range(len(external_actual_classes)):
-                write_file.write('%r;%s\n' % (external_actual_classes[i], ','.join(map(str, external_preds[i]))))
+    _, clf = pbil.run(1)
 
-    except Exception as e:
-        some_exception = e
-    finally:
-        if some_exception is not None:
-            raise some_exception
+    pbil.logger.individual_to_file(individual=clf, individual_name='last', step=pbil.n_generation)
+    pbil.logger.probabilities_to_file()
+
+    external_preds = list(map(list, clf.predict_proba(test_data)))
+    external_actual_classes = list(test_data.values(test_data.class_index).astype(np.int))
+
+    with open(
+            os.path.join(metadata_path, experiment_folder, dataset_name,
+                         'test_sample-%02d_fold-00_parameters.json' % n_trial),
+            'w'
+    ) as write_file:
+        dict_best_params = deepcopy(combination)
+        dict_best_params['individual'] = 'last'
+        for k in dict_best_params.keys():
+            dict_best_params[k] = str(dict_best_params[k])
+
+        json.dump(dict_best_params, write_file, indent=2)
+
+    with open(
+            os.path.join(metadata_path, experiment_folder, dataset_name, 'overall',
+                         'test_sample-%02d_fold-00_last.preds' % n_trial)
+            , 'w') as write_file:
+        write_file.write('classValue;Individual\n')
+        for i in range(len(external_actual_classes)):
+            write_file.write('%r;%s\n' % (external_actual_classes[i], ','.join(map(str, external_preds[i]))))
 
 
 def create_metadata_folder(some_args: argparse.Namespace, metadata_path: str, dataset_name: str) -> str:
