@@ -216,15 +216,18 @@ class PBIL(object):
                 fitness=train_fitness[i]
             ))
         population = []
-        for i in range(len_hall, n_individuals + len_hall):
-            local_options = {k: parameters[k][i] for k in self.classifier_names}
-            local_options['Aggregator'] = parameters['Aggregator'][i]
-            population += [Skeleton(
-                seed=seed,
-                log=ilogs[i],
-                options=local_options,
-                fitness=train_fitness[i]
-            )]
+
+        # for i in range(len_hall, n_individuals + len_hall):
+        for i in range(len_hall, counter_individuals + len_hall):
+            if train_fitness[i] > 0:
+                local_options = {k: parameters[k][i] for k in self.classifier_names}
+                local_options['Aggregator'] = parameters['Aggregator'][i]
+                population += [Skeleton(
+                    seed=seed,
+                    log=ilogs[i],
+                    options=local_options,
+                    fitness=train_fitness[i]
+                )]
 
         return population
 
