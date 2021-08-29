@@ -1,5 +1,8 @@
 # An Evolutionary Algorithm for Learning Interpretable Ensembles of Classifiers
 
+**NOTE**: the exact code used in the 2020 paper _An Evolutionary Algorithm for Learning Interpretable Ensembles of Classifiers_
+is [here](https://github.com/henryzord/PBIL/tree/f4958df00e2b77e16ce74c44ff2c6c27ea4cec04).
+
 This repository contains the source code of the algorithm presented in paper _An Evolutionary Algorithm for Learning 
 Interpretable Ensembles of Classifiers_.
 
